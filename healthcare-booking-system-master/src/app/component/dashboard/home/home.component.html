@@ -1,0 +1,88 @@
+<div class="main-home" *ngIf="role=='D'">
+    <span *ngFor="let i of slotData">
+
+        <div class="card" [ngClass]="{ 'red-text': i.booked === 0, 'green-text': i.booked === 1 }">
+            <div class="card-title">
+                <h1>Date</h1>
+                <h4>{{i.date}}</h4>
+            </div>
+            <div class="card-content">
+                <h3>Slote Time</h3>
+                <h5>
+                    <span>Start Time</span>
+                    <p>{{i.start_time}}</p>
+                </h5>
+                <h5>
+                    <span>End Time</span>
+                    <p>{{i.end_time}}</p>
+                </h5>
+            </div>
+            <!-- <div>
+                <a routerLink="category">More Info</a>
+            </div> -->
+        </div>
+    </span>
+</div>
+
+<div class="main-home" *ngIf="role=='P'">
+    <div class="card">
+        <div class="card-title">
+            <h1>Past Appointment</h1>
+        </div>
+        <div class="card-content">
+            <h3>Total Past Appointments</h3>
+            <h4>{{appointmentCount.past_count?appointmentCount.past_count:0}}</h4>
+        </div>
+        <div>
+            <!-- <span *ngIf="appointmentCount.past_count > 0"> -->
+                <a (click)="infoData({filter:'past'})" style="color: blue; text-decoration: underline;">More Info</a>
+            <!-- </span> -->
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-title">
+            <h1>Scheduled Appointment</h1>
+        </div>
+        <div class="card-content">
+            <h3>Total Scheduled Appointments</h3>
+            <h4>{{appointmentCount.scheduled_count?appointmentCount.scheduled_count:0}}</h4>
+        </div>
+        <div>
+            <a (click)="infoData({filter:'scheduled'})" style="color: blue; text-decoration: underline;">More
+                Info</a>
+        </div>
+    </div>
+</div>
+
+<div class="table-div" id="doctor" *ngIf="infoDataFlag">
+
+    <div class="category-header">
+        <h3 style=" margin: 5px 0px 5px 2px;">List of Appointment</h3>
+        <!-- <button class="btn btn-danger" (click)="openModal()"><i class="fa-solid fa-plus"></i> Add a New Product</button> -->
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Doctor Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Appointment Time</th>
+                <th scope="col">Reason</th>
+                <!-- <th scope="col"></th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of appointmentData">
+                <th scope="row">{{i.id}}</th>
+                <td>{{i.doctor_name}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.appointment_time}}</td>
+                <td>{{i.reason}}</td>
+                <!-- <td>
+                    <button class="btn btn-danger" (click)="openModal(i.doctor_id,i.date,i.start_time)">Book</button>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+    <!-- <button class="btn btn-primary" (click)="back()">Back</button> -->
+</div>
